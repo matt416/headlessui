@@ -46,7 +46,7 @@ describe('Safe guards', () => {
         </RadioGroup>
       )
 
-      assertRadioGroupLabel({ textContent: 'Pizza Delivery' })
+      await assertRadioGroupLabel({ textContent: 'Pizza Delivery' })
     })
   )
 
@@ -70,9 +70,9 @@ describe('Rendering', () => {
 
       expect(getRadioGroupOptions()).toHaveLength(3)
 
-      assertFocusable(getByText('Pickup'))
-      assertNotFocusable(getByText('Home delivery'))
-      assertNotFocusable(getByText('Dine in'))
+      await assertFocusable(getByText('Pickup'))
+      await assertNotFocusable(getByText('Home delivery'))
+      await assertNotFocusable(getByText('Dine in'))
     })
   )
 
@@ -90,9 +90,9 @@ describe('Rendering', () => {
 
       expect(getRadioGroupOptions()).toHaveLength(3)
 
-      assertFocusable(getByText('Pickup'))
-      assertNotFocusable(getByText('Home delivery'))
-      assertNotFocusable(getByText('Dine in'))
+      await assertFocusable(getByText('Pickup'))
+      await assertNotFocusable(getByText('Home delivery'))
+      await assertNotFocusable(getByText('Dine in'))
     })
   )
 
@@ -110,9 +110,9 @@ describe('Rendering', () => {
 
       expect(getRadioGroupOptions()).toHaveLength(3)
 
-      assertNotFocusable(getByText('Pickup'))
-      assertFocusable(getByText('Home delivery'))
-      assertNotFocusable(getByText('Dine in'))
+      await assertNotFocusable(getByText('Pickup'))
+      await assertFocusable(getByText('Home delivery'))
+      await assertNotFocusable(getByText('Dine in'))
     })
   )
 
@@ -141,13 +141,13 @@ describe('Rendering', () => {
       await click(getByText('Toggle')) // Render the pickup again
 
       await press(Keys.Tab) // Focus first element
-      assertActiveElement(getByText('Pickup'))
+      await assertActiveElement(getByText('Pickup'))
 
       await press(Keys.ArrowUp) // Loop around
-      assertActiveElement(getByText('Dine in'))
+      await assertActiveElement(getByText('Dine in'))
 
       await press(Keys.ArrowUp) // Up again
-      assertActiveElement(getByText('Home delivery'))
+      await assertActiveElement(getByText('Home delivery'))
     })
   )
 
@@ -310,15 +310,15 @@ describe('Rendering', () => {
       rerender(<Example hide={false} />) // Re-add RadioGroup.Option 2
 
       // Verify that the first radio group option is active
-      assertActiveElement(getByText('Option 1'))
+      await assertActiveElement(getByText('Option 1'))
 
       await press(Keys.ArrowDown)
       // Verify that the second radio group option is active
-      assertActiveElement(getByText('Option 2'))
+      await assertActiveElement(getByText('Option 2'))
 
       await press(Keys.ArrowDown)
       // Verify that the third radio group option is active
-      assertActiveElement(getByText('Option 3'))
+      await assertActiveElement(getByText('Option 3'))
     })
   )
 
@@ -426,7 +426,7 @@ describe('Keyboard interactions', () => {
 
         await press(Keys.Tab)
 
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
       })
     )
 
@@ -445,7 +445,7 @@ describe('Keyboard interactions', () => {
 
         await press(Keys.Tab)
 
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         expect(changeFn).toHaveBeenCalledTimes(0)
       })
@@ -465,7 +465,7 @@ describe('Keyboard interactions', () => {
 
         await press(Keys.Tab)
 
-        assertActiveElement(getByText('Home delivery'))
+        await assertActiveElement(getByText('Home delivery'))
       })
     )
 
@@ -484,7 +484,7 @@ describe('Keyboard interactions', () => {
 
         await press(Keys.Tab)
 
-        assertActiveElement(getByText('Home delivery'))
+        await assertActiveElement(getByText('Home delivery'))
 
         expect(changeFn).toHaveBeenCalledTimes(0)
       })
@@ -507,13 +507,13 @@ describe('Keyboard interactions', () => {
         )
 
         await press(Keys.Tab)
-        assertActiveElement(getByText('Before'))
+        await assertActiveElement(getByText('Before'))
 
         await press(Keys.Tab)
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         await press(Keys.Tab)
-        assertActiveElement(getByText('After'))
+        await assertActiveElement(getByText('After'))
       })
     )
 
@@ -534,13 +534,13 @@ describe('Keyboard interactions', () => {
         )
 
         await press(Keys.Tab)
-        assertActiveElement(getByText('Before'))
+        await assertActiveElement(getByText('Before'))
 
         await press(Keys.Tab)
-        assertActiveElement(getByText('Home delivery'))
+        await assertActiveElement(getByText('Home delivery'))
 
         await press(Keys.Tab)
-        assertActiveElement(getByText('After'))
+        await assertActiveElement(getByText('After'))
       })
     )
   })
@@ -565,7 +565,7 @@ describe('Keyboard interactions', () => {
 
         await press(shift(Keys.Tab))
 
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
       })
     )
 
@@ -589,7 +589,7 @@ describe('Keyboard interactions', () => {
 
         await press(shift(Keys.Tab))
 
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         expect(changeFn).toHaveBeenCalledTimes(0)
       })
@@ -614,7 +614,7 @@ describe('Keyboard interactions', () => {
 
         await press(shift(Keys.Tab))
 
-        assertActiveElement(getByText('Home delivery'))
+        await assertActiveElement(getByText('Home delivery'))
       })
     )
 
@@ -638,7 +638,7 @@ describe('Keyboard interactions', () => {
 
         await press(shift(Keys.Tab))
 
-        assertActiveElement(getByText('Home delivery'))
+        await assertActiveElement(getByText('Home delivery'))
 
         expect(changeFn).toHaveBeenCalledTimes(0)
       })
@@ -663,10 +663,10 @@ describe('Keyboard interactions', () => {
         await focus(getByText('After'))
 
         await press(shift(Keys.Tab))
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         await press(shift(Keys.Tab))
-        assertActiveElement(getByText('Before'))
+        await assertActiveElement(getByText('Before'))
       })
     )
 
@@ -689,10 +689,10 @@ describe('Keyboard interactions', () => {
         await focus(getByText('After'))
 
         await press(shift(Keys.Tab))
-        assertActiveElement(getByText('Home delivery'))
+        await assertActiveElement(getByText('Home delivery'))
 
         await press(shift(Keys.Tab))
-        assertActiveElement(getByText('Before'))
+        await assertActiveElement(getByText('Before'))
       })
     )
   })
@@ -721,13 +721,13 @@ describe('Keyboard interactions', () => {
         // Focus the RadioGroup
         await press(Keys.Tab)
 
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         await press(Keys.ArrowLeft) // Loop around
-        assertActiveElement(getByText('Dine in'))
+        await assertActiveElement(getByText('Dine in'))
 
         await press(Keys.ArrowLeft)
-        assertActiveElement(getByText('Home delivery'))
+        await assertActiveElement(getByText('Home delivery'))
 
         expect(changeFn).toHaveBeenCalledTimes(2)
         expect(changeFn).toHaveBeenNthCalledWith(1, 'dine-in')
@@ -760,13 +760,13 @@ describe('Keyboard interactions', () => {
         // Focus the RadioGroup
         await press(Keys.Tab)
 
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         await press(Keys.ArrowUp) // Loop around
-        assertActiveElement(getByText('Dine in'))
+        await assertActiveElement(getByText('Dine in'))
 
         await press(Keys.ArrowUp)
-        assertActiveElement(getByText('Home delivery'))
+        await assertActiveElement(getByText('Home delivery'))
 
         expect(changeFn).toHaveBeenCalledTimes(2)
         expect(changeFn).toHaveBeenNthCalledWith(1, 'dine-in')
@@ -799,16 +799,16 @@ describe('Keyboard interactions', () => {
         // Focus the RadioGroup
         await press(Keys.Tab)
 
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         await press(Keys.ArrowRight)
-        assertActiveElement(getByText('Home delivery'))
+        await assertActiveElement(getByText('Home delivery'))
 
         await press(Keys.ArrowRight)
-        assertActiveElement(getByText('Dine in'))
+        await assertActiveElement(getByText('Dine in'))
 
         await press(Keys.ArrowRight) // Loop around
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         expect(changeFn).toHaveBeenCalledTimes(3)
         expect(changeFn).toHaveBeenNthCalledWith(1, 'home-delivery')
@@ -842,16 +842,16 @@ describe('Keyboard interactions', () => {
         // Focus the RadioGroup
         await press(Keys.Tab)
 
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         await press(Keys.ArrowDown)
-        assertActiveElement(getByText('Home delivery'))
+        await assertActiveElement(getByText('Home delivery'))
 
         await press(Keys.ArrowDown)
-        assertActiveElement(getByText('Dine in'))
+        await assertActiveElement(getByText('Dine in'))
 
         await press(Keys.ArrowDown) // Loop around
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         expect(changeFn).toHaveBeenCalledTimes(3)
         expect(changeFn).toHaveBeenNthCalledWith(1, 'home-delivery')
@@ -885,10 +885,10 @@ describe('Keyboard interactions', () => {
         // Focus the RadioGroup
         await press(Keys.Tab)
 
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         await press(Keys.Space)
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         expect(changeFn).toHaveBeenCalledTimes(1)
         expect(changeFn).toHaveBeenNthCalledWith(1, 'pickup')
@@ -929,14 +929,14 @@ describe('Keyboard interactions', () => {
         // Focus the RadioGroup
         await press(Keys.Tab)
 
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         await press(Keys.Space)
         await press(Keys.Space)
         await press(Keys.Space)
         await press(Keys.Space)
         await press(Keys.Space)
-        assertActiveElement(getByText('Pickup'))
+        await assertActiveElement(getByText('Pickup'))
 
         expect(changeFn).toHaveBeenCalledTimes(1)
         expect(changeFn).toHaveBeenNthCalledWith(1, 'pickup')
@@ -1006,7 +1006,7 @@ describe('Mouse interactions', () => {
 
       await click(getByText('Home delivery'))
 
-      assertActiveElement(getByText('Home delivery'))
+      await assertActiveElement(getByText('Home delivery'))
 
       expect(changeFn).toHaveBeenNthCalledWith(1, 'home-delivery')
     })
@@ -1045,7 +1045,7 @@ describe('Mouse interactions', () => {
       await click(getByText('Home delivery'))
       await click(getByText('Home delivery'))
 
-      assertActiveElement(getByText('Home delivery'))
+      await assertActiveElement(getByText('Home delivery'))
 
       expect(changeFn).toHaveBeenCalledTimes(1)
     })
