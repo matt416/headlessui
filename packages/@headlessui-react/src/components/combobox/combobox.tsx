@@ -117,10 +117,10 @@ type Actions<T> =
   | { type: ActionTypes.OpenCombobox }
   | { type: ActionTypes.GoToOption; focus: Focus.Specific; id: string; trigger?: ActivationTrigger }
   | {
-      type: ActionTypes.GoToOption
-      focus: Exclude<Focus, Focus.Specific>
-      trigger?: ActivationTrigger
-    }
+    type: ActionTypes.GoToOption
+    focus: Exclude<Focus, Focus.Specific>
+    trigger?: ActivationTrigger
+  }
   | { type: ActionTypes.RegisterOption; id: string; dataRef: ComboboxOptionDataRef<T> }
   | { type: ActionTypes.UnregisterOption; id: string }
 
@@ -252,28 +252,28 @@ type _Actions = ReturnType<typeof useActions>
 
 let ComboboxDataContext = createContext<
   | ({
-      value: unknown
-      disabled: boolean
-      mode: ValueMode
-      activeOptionIndex: number | null
-      nullable: boolean
-      compare(a: unknown, z: unknown): boolean
-      isSelected(value: unknown): boolean
-      __demoMode: boolean
+    value: unknown
+    disabled: boolean
+    mode: ValueMode
+    activeOptionIndex: number | null
+    nullable: boolean
+    compare(a: unknown, z: unknown): boolean
+    isSelected(value: unknown): boolean
+    __demoMode: boolean
 
-      inputPropsRef: MutableRefObject<{
-        displayValue?(item: unknown): string
-      }>
-      optionsPropsRef: MutableRefObject<{
-        static: boolean
-        hold: boolean
-      }>
+    inputPropsRef: MutableRefObject<{
+      displayValue?(item: unknown): string
+    }>
+    optionsPropsRef: MutableRefObject<{
+      static: boolean
+      hold: boolean
+    }>
 
-      labelRef: MutableRefObject<HTMLLabelElement | null>
-      inputRef: MutableRefObject<HTMLInputElement | null>
-      buttonRef: MutableRefObject<HTMLButtonElement | null>
-      optionsRef: MutableRefObject<HTMLUListElement | null>
-    } & Omit<StateDefinition<unknown>, 'dataRef'>)
+    labelRef: MutableRefObject<HTMLLabelElement | null>
+    inputRef: MutableRefObject<HTMLInputElement | null>
+    buttonRef: MutableRefObject<HTMLButtonElement | null>
+    optionsRef: MutableRefObject<HTMLUListElement | null>
+  } & Omit<StateDefinition<unknown>, 'dataRef'>)
   | null
 >(null)
 ComboboxDataContext.displayName = 'ComboboxDataContext'
@@ -357,9 +357,9 @@ let ComboboxRoot = forwardRefWithAs(function Combobox<
   let compare = useEvent(
     typeof by === 'string'
       ? (a: TType, z: TType) => {
-          let property = by as unknown as keyof TType
-          return a[property] === z[property]
-        }
+        let property = by as unknown as keyof TType
+        return a[property] === z[property]
+      }
       : by
   )
 
@@ -1120,4 +1120,4 @@ let Option = forwardRefWithAs(function Option<
 
 // ---
 
-export let Combobox = Object.assign(ComboboxRoot, { Input, Button, Label, Options, Option })
+export let Combobox = Object.assign(ComboboxRoot, { Input, Button, Label, Options, Option, ComboboxActionsContext, ComboboxDataContext })
